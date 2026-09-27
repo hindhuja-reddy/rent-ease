@@ -61,20 +61,18 @@ RentEase/
 * npm
 * MongoDB or MongoDB Atlas
 
+Yep man, this is the clean order:
+
 ### Installation
+
+**Terminal 1 – Clone + Backend setup**
 
 ```bash
 git clone https://github.com/hindhuja-reddy/RentEase.git
-cd RentEase
-
-cd backend
-npm install
-
-cd ../frontend
-npm install
+cd RentEase/backend
 ```
 
-Create a `.env` file inside `backend/`:
+Create `.env` inside `backend/`:
 
 ```env
 PORT=8001
@@ -82,23 +80,55 @@ MONGO_DB=your_mongodb_connection_string
 JWT_KEY=your_jwt_secret_key
 ```
 
-### Run the Application
-
-**Backend:**
+Then:
 
 ```bash
-cd backend
+npm install
 npm start
 ```
 
-**Frontend:**
+---
+
+**Terminal 2 – Frontend setup**
 
 ```bash
-cd frontend
+cd RentEase/frontend
+npm install
 npm start
 ```
 
-The frontend runs at `http://localhost:3000`.
+Frontend: `http://localhost:3000`
+Backend: `http://localhost:8001`
+
+### Create Admin Account
+
+After the frontend is running, open:
+
+```text
+http://localhost:3000
+```
+
+Press **F12 → Console** and run:
+
+```javascript
+fetch('http://localhost:8001/api/user/register', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({
+    name: 'Admin User',
+    email: 'admin@rentease.com',
+    password: 'admin123',
+    type: 'Admin'
+  })
+}).then(r => r.json()).then(d => console.log(d));
+```
+
+Then log in using:
+
+```text
+Email: admin@rentease.com
+Password: admin123
+```
 
 ## **Contributor**
 
